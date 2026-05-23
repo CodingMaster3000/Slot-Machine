@@ -19,8 +19,6 @@
             Console.WriteLine("The game starts now.You have $50 cash at start.\n--------------------------------------------------");
             while (cash > BANKRUPTCY_CASH_LEVEL)
             {
-                Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
-                mode = Console.ReadLine().ToLower();
                 for (int i = 0; i < gridSize; i++)
                 {
                     for (int j = 0; j < gridSize; j++)
@@ -28,14 +26,21 @@
                         Random rng = new Random();
                         randomCellValue = rng.Next(CELL_VALUE_LOWER_BOUND_INCLUSIVE, CELL_VALUE_UPPER_BOUND_EXCLUSIVE);
                         grid[i,j] = randomCellValue.ToString();
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
+                mode = Console.ReadLine().ToLower();
+                for (int i = 0; i < gridSize; i++)
+                {
+                    for (int j = 0; j < gridSize; j++)
+                    {
                         Console.Write($"{grid[i, j]}");
                         Console.Write(" ");
                     }
                     Console.WriteLine();
                 }
-
             }
-
         }
     }
 }
