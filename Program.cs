@@ -27,18 +27,43 @@
                         randomCellValue = rng.Next(CELL_VALUE_LOWER_BOUND_INCLUSIVE, CELL_VALUE_UPPER_BOUND_EXCLUSIVE);
                         grid[i,j] = randomCellValue.ToString();
                     }
-                    Console.WriteLine();
                 }
                 Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
                 mode = Console.ReadLine().ToLower();
+
+                if (mode == "center line")
+                {
+                    center
+                }
                 for (int i = 0; i < gridSize; i++)
                 {
+                    Console.Write("+");
                     for (int j = 0; j < gridSize; j++)
                     {
+                        for (int k = 0; k < 3; k++)
+                        {
+                            Console.Write("-");
+                        }
+                        Console.Write("+");
+                    }
+                    Console.WriteLine();
+                    for (int j = 0; j < gridSize; j++)
+                    {
+                        Console.Write("|");
+                        Console.Write(" ");
                         Console.Write($"{grid[i, j]}");
                         Console.Write(" ");
                     }
+                    Console.Write("|");
                     Console.WriteLine();
+                    for (int j = 0; j < gridSize; j++)
+                    {
+                        for (int k = 0; k < 3; k++)
+                        {
+                            Console.Write("-");
+                        }
+                        Console.Write("+");
+                    }
                 }
             }
         }
