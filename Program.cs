@@ -15,7 +15,6 @@
             int cash = 50;
             int randomCellValue;
             int centerLinePosition;
-
             string gridSizeUserInput;
             string mode;
             bool centerLineWon;
@@ -41,7 +40,6 @@
                 for (int i = 0; i < gridSize; i++)
                 {
                     winningLines[i] = true;
-
                 }
                 winningDiagonals[0] = true;
                 winningDiagonals[1] = true;
@@ -53,7 +51,7 @@
                     centerLineWon = true;
                     for (int i = 1; i < gridSize; i++)
                     {
-                        if (Convert.ToInt32(grid[centerLinePosition, 0]) != Convert.ToInt32(grid[centerLinePosition, i]))
+                        if (grid[centerLinePosition, 0] != grid[centerLinePosition, i])
                         {
                             centerLineWon = false;
                             break;
@@ -68,11 +66,11 @@
                 {
                     for (int i = 1; i < gridSize; i++)
                     {
-                        if (Convert.ToInt32(grid[0, 0]) != Convert.ToInt32(grid[i, i]))
+                        if (grid[0, 0] != grid[i, i])
                         {
                             winningDiagonals[0] = false;
                         }
-                        if (Convert.ToInt32(grid[gridSize-1, 0]) != Convert.ToInt32(grid[gridSize-i-1, i]))
+                        if (grid[gridSize-1, 0] != grid[gridSize-i-1, i])
                         {
                             winningDiagonals[1] = false;
                         }
@@ -95,7 +93,7 @@
                     {
                         for (int j = 0; j < gridSize; j++)
                         {
-                            if (Convert.ToInt32(grid[0, i]) != Convert.ToInt32(grid[j, i]))
+                            if (grid[0, i] != grid[j, i])
                             {
                                 winningLines[i] = false;
                                 break;
@@ -116,7 +114,7 @@
                     {
                         for (int j = 0; j < gridSize; j++)
                         {
-                            if (Convert.ToInt32(grid[i, 0]) != Convert.ToInt32(grid[i, j]))
+                            if (grid[i, 0] != grid[i, j])
                             {
                                 winningLines[i] = false;
                                 break;
