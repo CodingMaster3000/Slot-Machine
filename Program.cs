@@ -11,44 +11,17 @@
             int cash = 50;
             int randomCellValue;
             int centerLinePosition;
-            int lineComboValue;
-            int amountOfCenterLineCoordinates;
-            int amountOfAllHorizontalCoordinates;
-            int amountOfAllVerticalCoordinates;
-            int amountOfAlldiagnoalsCoordniates;
+
             string gridSizeUserInput;
             string mode;
-            bool lineWon;
+            bool centerLineWon;
             Console.WriteLine("You can choose the size of the grid for the slot machine. How large should the grid be?");
             gridSizeUserInput = Console.ReadLine();
             gridSize = Convert.ToInt32(gridSizeUserInput);
-            amountOfCenterLineCoordinates = gridSize * 2;
-            amountOfAllHorizontalCoordinates = gridSize * gridSize * 2;
-            amountOfAllVerticalCoordinates = gridSize * gridSize * 2;
-            amountOfAlldiagnoalsCoordniates = gridSize * 2 * 2;
             centerLinePosition = gridSize / 2;
-            string[] centerLine = new string[amountOfCenterLineCoordinates];
-            string[] allHorizontal = new string[amountOfAllHorizontalCoordinates];
-            string[] allVertical = new string[amountOfAllVerticalCoordinates];
-            string[] diagonals = new string[amountOfAlldiagnoalsCoordniates];
-            for (int i = 0; i < gridSize; i++)
-            {
-                centerLine[i * 2] = i.ToString();
-                centerLine[i * 2 + 1] = centerLinePosition.ToString();
-                for (int j = 0; j < gridSize; j++)
-                {
-                    allHorizontal[(i*gridSize + j)*2] = j.ToString();
-                    allHorizontal[(i * gridSize + j) * 2+1] = i.ToString();
-                    allVertical[(i * gridSize + j) * 2] = i.ToString();
-                    allVertical[(i * gridSize + j) * 2 + 1] = j.ToString();
-
-                }
-                diagonals[i] = i.ToString();
-                diagonals[i+1] = i.ToString();
-                diagonals[gridSize*2-i*2] = i.ToString();
-                diagonals[i*2 + 1] = i.ToString();
-            }
             string[,] grid = new string[gridSize, gridSize];
+            bool[] winningLines = new bool[gridSize];
+            bool[] winningDiagonals = new bool[2];
             Console.WriteLine("The game starts now.You have $50 cash at start.\n--------------------------------------------------");
             while (cash > BANKRUPTCY_CASH_LEVEL)
             {
@@ -61,22 +34,97 @@
                         grid[i, j] = randomCellValue.ToString();
                     }
                 }
+                for (int i = 0; i < gridSize; i++)
+                {
+                    winningLines[i] = true;
+
+                }
+                winningDiagonals[0] = true;
+                winningDiagonals[1] = true;
+                centerLineWon = true;
                 Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
                 mode = Console.ReadLine().ToLower();
-                if (mode == "center line")
+                if (mode == "cl")
                 {
-                    lineWon = true;
-                    lineComboValue = Convert.ToInt32(grid[centerLinePosition, 0]);
+                    centerLineWon = true;
                     for (int i = 1; i < gridSize; i++)
                     {
                         if (Convert.ToInt32(grid[centerLinePosition, 0]) != Convert.ToInt32(grid[centerLinePosition, i]))
                         {
-                            lineWon = false;
+                            centerLineWon = false;
+                            break;
                         }
                     }
-                    if (lineWon == true)
+                    if (centerLineWon == true)
                     {
                         cash++;
+                    }
+                }
+                if (mode == "d")
+                {
+                    for (int i = 1; i < gridSize; i++)
+                    {
+                        if (Convert.ToInt32(grid[0, 0]) != Convert.ToInt32(grid[i, i]))
+                        {
+                            winningDiagonals[0] = false;
+                        }
+                        if (Convert.ToInt32(grid[gridSize-1, 0]) != Convert.ToInt32(grid[gridSize-i-1, i]))
+                        {
+                            winningDiagonals[1] = false;
+                        }
+                        if (winningDiagonals[0] == false && winningDiagonals[1] == false)
+                        {
+                            break;
+                        }
+                    }
+                    foreach (bool i in winningDiagonals)
+                    {
+                        if (i)
+                        {
+                            cash++;
+                        }
+                    }
+                }
+                if (mode == "ah")
+                {
+                    for (int i = 0; i < gridSize; i++)
+                    {
+                        for (int j = 0; j < gridSize; j++)
+                        {
+                            if (Convert.ToInt32(grid[0, i]) != Convert.ToInt32(grid[j, i]))
+                            {
+                                winningLines[i] = false;
+                                break;
+                            }
+                        }
+                    }
+                    foreach (bool i in winningLines)
+                    {
+                        if (i)
+                        {
+                            cash++;
+                        }
+                    }
+                }
+                if (mode == "av")
+                {
+                    for (int i = 0; i < gridSize; i++)
+                    {
+                        for (int j = 0; j < gridSize; j++)
+                        {
+                            if (Convert.ToInt32(grid[i, 0]) != Convert.ToInt32(grid[i, j]))
+                            {
+                                winningLines[i] = false;
+                                break;
+                            }
+                        }
+                    }
+                    foreach (bool i in winningLines)
+                    {
+                        if (i)
+                        {
+                            cash++;
+                        }
                     }
                 }
                 for (int i = 0; i < gridSize; i++)
