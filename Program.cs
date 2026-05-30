@@ -12,7 +12,9 @@
             const string ALL_HORIZONTAL_MODE = "ah";
             const string ALL_VERTICAL_MODE = "av";
             int gridSize;
-            int cash = 50;
+            double cash = 50;
+            int betValue = 3;
+            int winningBonus = 2;
             int randomCellValue;
             int centerLinePosition;
             string gridSizeUserInput;
@@ -45,7 +47,7 @@
                 winningDiagonals[1] = true;
                 centerLineWon = true;
                 Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
-                cash -= 3;
+                cash -= betValue;
                 mode = Console.ReadLine().ToLower();
                 if (mode == CENTER_LINE_MODE)
                 {
@@ -60,7 +62,7 @@
                     }
                     if (centerLineWon)
                     {
-                        cash++;
+                        cash += winningBonus*betValue;
                     }
 
                 }
@@ -85,7 +87,7 @@
                     {
                         if (i)
                         {
-                            cash++;
+                            cash += betValue;
                         }
 
                     }
@@ -107,7 +109,7 @@
                     {
                         if (i)
                         {
-                            cash++;
+                            cash += winningBonus * betValue / gridSize;
                         }
                     }
                 }
@@ -128,7 +130,7 @@
                     {
                         if (i)
                         {
-                            cash++;
+                            cash += winningBonus * betValue / gridSize;
                         }
                     }
                 }
