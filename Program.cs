@@ -45,6 +45,7 @@
                 winningDiagonals[1] = true;
                 centerLineWon = true;
                 Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
+                cash -= 3;
                 mode = Console.ReadLine().ToLower();
                 if (mode == CENTER_LINE_MODE)
                 {
@@ -57,10 +58,11 @@
                             break;
                         }
                     }
-                    if (centerLineWon == true)
+                    if (centerLineWon)
                     {
                         cash++;
                     }
+
                 }
                 if (mode == DIAGONALS_MODE)
                 {
@@ -85,6 +87,7 @@
                         {
                             cash++;
                         }
+
                     }
                 }
                 if (mode == ALL_HORIZONTAL_MODE)
