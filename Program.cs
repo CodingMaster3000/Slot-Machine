@@ -7,6 +7,10 @@
             const int BANKRUPTCY_CASH_LEVEL = 0;
             const int CELL_VALUE_LOWER_BOUND_INCLUSIVE = 0;
             const int CELL_VALUE_UPPER_BOUND_EXCLUSIVE = 2;
+            const string CENTER_LINE_MODE = "cl";
+            const string DIAGONALS_MODE = "d";
+            const string ALL_HORIZONTAL_MODE = "ah";
+            const string ALL_VERTICAL_MODE = "av";
             int gridSize;
             int cash = 50;
             int randomCellValue;
@@ -22,6 +26,7 @@
             string[,] grid = new string[gridSize, gridSize];
             bool[] winningLines = new bool[gridSize];
             bool[] winningDiagonals = new bool[2];
+            Random rng = new Random();
             Console.WriteLine("The game starts now.You have $50 cash at start.\n--------------------------------------------------");
             while (cash > BANKRUPTCY_CASH_LEVEL)
             {
@@ -29,7 +34,6 @@
                 {
                     for (int j = 0; j < gridSize; j++)
                     {
-                        Random rng = new Random();
                         randomCellValue = rng.Next(CELL_VALUE_LOWER_BOUND_INCLUSIVE, CELL_VALUE_UPPER_BOUND_EXCLUSIVE);
                         grid[i, j] = randomCellValue.ToString();
                     }
@@ -44,7 +48,7 @@
                 centerLineWon = true;
                 Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
                 mode = Console.ReadLine().ToLower();
-                if (mode == "cl")
+                if (mode == CENTER_LINE_MODE)
                 {
                     centerLineWon = true;
                     for (int i = 1; i < gridSize; i++)
@@ -60,7 +64,7 @@
                         cash++;
                     }
                 }
-                if (mode == "d")
+                if (mode == DIAGONALS_MODE)
                 {
                     for (int i = 1; i < gridSize; i++)
                     {
@@ -85,7 +89,7 @@
                         }
                     }
                 }
-                if (mode == "ah")
+                if (mode == ALL_HORIZONTAL_MODE)
                 {
                     for (int i = 0; i < gridSize; i++)
                     {
@@ -106,7 +110,7 @@
                         }
                     }
                 }
-                if (mode == "av")
+                if (mode == ALL_VERTICAL_MODE)
                 {
                     for (int i = 0; i < gridSize; i++)
                     {
