@@ -93,7 +93,7 @@
                     {
                         for (int j = 0; j < gridSize; j++)
                         {
-                            if (grid[0, i] != grid[j, i])
+                            if (grid[i, 0] != grid[i, j])
                             {
                                 winningLines[i] = false;
                                 break;
@@ -114,7 +114,7 @@
                     {
                         for (int j = 0; j < gridSize; j++)
                         {
-                            if (grid[i, 0] != grid[i, j])
+                            if (grid[0, i] != grid[j, i])
                             {
                                 winningLines[i] = false;
                                 break;
