@@ -62,7 +62,7 @@
                     }
                     if (centerLineWon)
                     {
-                        cash += Math.Pow(2, gridSize) * betValue;
+                        cash += Math.Pow(2, gridSize - 1) * betValue;
                     }
 
                 }
@@ -87,7 +87,7 @@
                     {
                         if (i)
                         {
-                            cash += Math.Pow(2, gridSize) * betValue / 2;
+                            cash += Math.Pow(2, gridSize -1) * betValue / 2;
                         }
 
                     }
@@ -109,7 +109,7 @@
                     {
                         if (i)
                         {
-                            cash += Math.Pow(2, gridSize) * betValue / gridSize;
+                            cash += Math.Pow(2, gridSize -1) * betValue / gridSize;
                         }
                     }
                 }
@@ -130,7 +130,7 @@
                     {
                         if (i)
                         {
-                            cash += Math.Pow(2, gridSize) * betValue / gridSize;
+                            cash += Math.Pow(2, gridSize - 1) * betValue / gridSize;
                         }
                     }
                 }
