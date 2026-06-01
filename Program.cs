@@ -1,5 +1,4 @@
 ﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Slot_Machine
 {
     internal class Program
@@ -20,7 +19,6 @@ namespace Slot_Machine
             int centerLinePosition;
             string gridSizeUserInput;
             string mode;
-
             bool centerLineWon;
             bool gridSizeSuccess = false;
             bool modeSuccess = false;
@@ -33,13 +31,9 @@ namespace Slot_Machine
             while (gridSizeSuccess == false)
             {
                 Console.WriteLine("You can choose the size of the grid for the slot machine. How large should the grid be?");
-
                 gridSizeUserInput = Console.ReadLine();
-
                 gridSizeSuccess = int.TryParse(gridSizeUserInput, out gridSize);
-
             }
-
             centerLinePosition = gridSize / 2;
             string[,] grid = new string[gridSize, gridSize];
             bool[] winningLines = new bool[gridSize];
@@ -76,9 +70,17 @@ namespace Slot_Machine
                             modeSuccess = true;
                         }
                     }
+                }
+                if (cash >= betValue)
+                {
+                    cash -= betValue;
 
                 }
-                cash -= betValue;
+                else
+                {
+                    Console.WriteLine($"You have run out of cash. You have only {cash}$ left which is not enough to place the requuired {betValue}$ bet.");
+                    break;
+                }
                 if (mode == CENTER_LINE_MODE)
                 {
                     for (int i = 1; i < gridSize; i++)
