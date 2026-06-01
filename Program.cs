@@ -1,4 +1,6 @@
-﻿namespace Slot_Machine
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Slot_Machine
 {
     internal class Program
     {
@@ -11,18 +13,25 @@
             const string DIAGONALS_MODE = "d";
             const string ALL_HORIZONTAL_MODE = "ah";
             const string ALL_VERTICAL_MODE = "av";
-            int gridSize;
+            int gridSize = 0;
             double cash = 50;
             int betValue = 3;
-            int winningBonus = 2;
             int randomCellValue;
             int centerLinePosition;
             string gridSizeUserInput;
             string mode;
             bool centerLineWon;
-            Console.WriteLine("You can choose the size of the grid for the slot machine. How large should the grid be?");
-            gridSizeUserInput = Console.ReadLine();
-            gridSize = Convert.ToInt32(gridSizeUserInput);
+            bool success = false;
+            while (success == false)
+            {
+                Console.WriteLine("You can choose the size of the grid for the slot machine. How large should the grid be?");
+
+                gridSizeUserInput = Console.ReadLine();
+
+                success = int.TryParse(gridSizeUserInput, out gridSize);
+
+            }
+
             centerLinePosition = gridSize / 2;
             string[,] grid = new string[gridSize, gridSize];
             bool[] winningLines = new bool[gridSize];
@@ -51,7 +60,6 @@
                 mode = Console.ReadLine().ToLower();
                 if (mode == CENTER_LINE_MODE)
                 {
-                    centerLineWon = true;
                     for (int i = 1; i < gridSize; i++)
                     {
                         if (grid[centerLinePosition, 0] != grid[centerLinePosition, i])
@@ -64,7 +72,6 @@
                     {
                         cash += Math.Pow(2, gridSize - 1) * betValue;
                     }
-
                 }
                 if (mode == DIAGONALS_MODE)
                 {
@@ -89,7 +96,6 @@
                         {
                             cash += Math.Pow(2, gridSize -1) * betValue / 2;
                         }
-
                     }
                 }
                 if (mode == ALL_HORIZONTAL_MODE)
