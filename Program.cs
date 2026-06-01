@@ -20,15 +20,23 @@ namespace Slot_Machine
             int centerLinePosition;
             string gridSizeUserInput;
             string mode;
+
             bool centerLineWon;
-            bool success = false;
-            while (success == false)
+            bool gridSizeSuccess = false;
+            bool modeSuccess = false;
+            string[] modes = new string[4] { 
+                CENTER_LINE_MODE, 
+                DIAGONALS_MODE, 
+                ALL_HORIZONTAL_MODE, 
+                ALL_VERTICAL_MODE 
+            };
+            while (gridSizeSuccess == false)
             {
                 Console.WriteLine("You can choose the size of the grid for the slot machine. How large should the grid be?");
 
                 gridSizeUserInput = Console.ReadLine();
 
-                success = int.TryParse(gridSizeUserInput, out gridSize);
+                gridSizeSuccess = int.TryParse(gridSizeUserInput, out gridSize);
 
             }
 
@@ -55,9 +63,22 @@ namespace Slot_Machine
                 winningDiagonals[0] = true;
                 winningDiagonals[1] = true;
                 centerLineWon = true;
-                Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
+                modeSuccess = false;
+                mode = "";
+                while (modeSuccess == false)
+                {
+                    Console.WriteLine("Choose a mode.(center line / all horizontal lines / all vertical lines / all diagonal lines");
+                    mode = Console.ReadLine().ToLower();
+                    foreach (string m in modes)
+                    {
+                        if (mode == m)
+                        {
+                            modeSuccess = true;
+                        }
+                    }
+
+                }
                 cash -= betValue;
-                mode = Console.ReadLine().ToLower();
                 if (mode == CENTER_LINE_MODE)
                 {
                     for (int i = 1; i < gridSize; i++)
